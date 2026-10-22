@@ -1,0 +1,171 @@
+  <!-- Navigation Tabs -->
+  <nav class="flex bg-gray-900/80 p-1 rounded-xl border border-gray-800">
+    <button id="tab-btn-quiz" onclick="switchTab('quiz')" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500 text-black font-bold shadow-lg shadow-cyan-500/20">
+      <i class="fa-solid fa-circle-question"></i> 1. 개념 학습 & 퀴즈
+    </button>
+    <button id="tab-btn-create" onclick="switchTab('create')" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-400 hover:text-white">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> 2. AI 예술 창작
+    </button>
+    <button id="tab-btn-gallery" onclick="switchTab('gallery')" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-400 hover:text-white">
+      <i class="fa-solid fa-border-all"></i> 3. 가상 갤러리
+    </button>
+  </nav>
+</div>
+
+
+<!-- STEP 1: Quiz & Learning Section -->
+<section id="sec-quiz" class="space-y-6">
+  <div class="glass-card p-6 rounded-2xl border-l-4 border-l-cyan-500">
+    <h2 class="text-2xl font-bold text-cyan-400 mb-2 flex items-center gap-2">
+      <i class="fa-solid fa-book-open"></i>
+      학습 목표: 메타버스와 AI 예술의 이해
+    </h2>
+    <p class="text-gray-300 text-sm leading-relaxed">
+      현대 미술에서 인공지능은 새로운 표현 도구로 사용되며, 메타버스는 시공간의 제약을 뛰어넘어 인터랙티브한 전시 공간을 제공합니다. 
+      아래 퀴즈를 풀면서 기본 개념을 익히고, 작품 창작에 필요한 <span class="text-pink-400 font-bold">캔버스 포인트</span>를 획득해보세요!
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6" id="quiz-container">
+    <!-- Quiz cards generated dynamically via JS -->
+  </div>
+
+  <!-- Energy/Point Banner -->
+  <div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 border border-cyan-500/30">
+    <div class="flex items-center gap-4">
+      <div class="p-4 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/30 flex items-center justify-center">
+        <i class="fa-solid fa-bolt text-2xl"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-white">창작 준비 상태</h3>
+        <p class="text-sm text-gray-400">퀴즈를 맞춰 포인트를 획득하면 AI 예술 작품을 창작할 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-2xl font-extrabold text-pink-400" id="point-display">0 / 300 Pts</span>
+      <button onclick="switchTab('create')" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-bold rounded-xl shadow-lg transition-all flex items-center gap-2">
+        AI 창작하러 가기 <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 2: AI Art Creation Section -->
+<section id="sec-create" class="hidden space-y-6">
+  <div class="glass-card p-6 rounded-2xl border-l-4 border-l-pink-500">
+    <h2 class="text-2xl font-bold text-pink-400 mb-2 flex items-center gap-2">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      AI 프롬프트 예술 화가
+    </h2>
+    <p class="text-gray-300 text-sm leading-relaxed">
+      예술적 기법, 화풍, 테마 선택지를 클릭하거나 키워드를 조합하여 프롬프트를 구성하세요. 
+      생성된 작품은 메타버스 가상 갤러리에 자동으로 등록됩니다.
+    </p>
+  </div>
+
+  <div class="grid lg:grid-cols-12 gap-8">
+    <!-- Control Panel -->
+    <div class="lg:col-span-6 space-y-6 glass-card p-6 rounded-2xl">
+      <div>
+        <label class="block text-sm font-semibold text-cyan-400 mb-2">1. 미술 사조 및 화풍 선택</label>
+        <div class="grid grid-cols-3 gap-2" id="style-selector">
+          <button onclick="setStyle('인상주의, 따뜻한 빛과 붓터치')" class="style-btn bg-gray-800/80 hover:bg-cyan-900/50 border border-gray-700 p-2.5 rounded-lg text-xs text-gray-300 transition-all text-center">인상주의</button>
+          <button onclick="setStyle('초현실주의, 꿈속 같은 신비로움')" class="style-btn bg-gray-800/80 hover:bg-cyan-900/50 border border-gray-700 p-2.5 rounded-lg text-xs text-gray-300 transition-all text-center">초현실주의</button>
+          <button onclick="setStyle('사이버펑크, 화려한 네온과 미래도시')" class="style-btn bg-gray-800/80 hover:bg-cyan-900/50 border border-gray-700 p-2.5 rounded-lg text-xs text-gray-300 transition-all text-center">사이버펑크</button>
+          <button onclick="setStyle('한국 수묵화, 짙은 먹선과 은은한 여백')" class="style-btn bg-gray-800/80 hover:bg-cyan-900/50 border border-gray-700 p-2.5 rounded-lg text-xs text-gray-300 transition-all text-center">수묵화</button>
+          <button onclick="setStyle('입체주의, 다각도의 기하학적 분해')" class="style-btn bg-gray-800/80 hover:bg-cyan-900/50 border border-gray-700 p-2.5 rounded-lg text-xs text-gray-300 transition-all text-center">입체주의</button>
+          <button onclick="setStyle('3D 디지털 아트, 글래스모피즘과 광원')" class="style-btn bg-gray-800/80 hover:bg-cyan-900/50 border border-gray-700 p-2.5 rounded-lg text-xs text-gray-300 transition-all text-center">3D 디지털</button>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-cyan-400 mb-2">2. 작품 주제 / 표현 대상 입력</label>
+        <input type="text" id="subject-input" placeholder="예: 메타버스 속에서 고양이가 우주를 헤엄치는 모습" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-cyan-400 mb-2">3. 완성된 AI 프롬프트 (최종 지시어)</label>
+        <textarea id="prompt-output" readonly rows="3" class="w-full bg-gray-950/80 border border-gray-800 rounded-lg p-3 text-xs text-gray-300 font-mono resize-none"></textarea>
+      </div>
+
+      <button onclick="generateArtwork()" class="w-full py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-pink-500/25 transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-sparkles"></i> AI 미술 작품 생성하기
+      </button>
+    </div>
+
+    <!-- Canvas Preview Panel -->
+    <div class="lg:col-span-6 glass-card p-6 rounded-2xl flex flex-col justify-between items-center text-center">
+      <div class="w-full h-80 bg-gray-950 rounded-xl border border-gray-800 flex items-center justify-center relative overflow-hidden group">
+        <div id="art-loading" class="hidden absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-10 space-y-3">
+          <div class="w-10 h-10 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+          <p class="text-xs text-cyan-400 animate-pulse">AI가 화풍과 키워드를 분석하여 창작 중입니다...</p>
+        </div>
+        
+        <img id="art-preview" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="작품 프레임" class="w-full h-full object-cover rounded-xl transition-all duration-300">
+      </div>
+
+      <div class="w-full mt-4 space-y-3 text-left">
+        <div>
+          <label class="block text-xs text-gray-400">작품 제목 설정</label>
+          <input type="text" id="art-title" value="시공간을 너머선 융합" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-sm font-bold text-white mt-1 focus:outline-none focus:border-cyan-500">
+        </div>
+        <button onclick="addToGallery()" class="w-full py-3 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
+          <i class="fa-solid fa-plus-circle"></i> 메타버스 갤러리에 전시 등록하기
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 3: Virtual Metaverse Gallery Section -->
+<section id="sec-gallery" class="hidden space-y-6">
+  <div class="glass-card p-6 rounded-2xl border-l-4 border-l-purple-500 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <h2 class="text-2xl font-bold text-purple-400 mb-2 flex items-center gap-2">
+        <i class="fa-solid fa-cube"></i>
+        3D 메타버스 가상 갤러리
+      </h2>
+      <p class="text-gray-300 text-sm">
+        AI로 만들어진 나만의 작품들이 전시된 가상 공간입니다. 시공간의 한계를 뛰어넘어 감상해보세요.
+      </p>
+    </div>
+    <div class="px-4 py-2 bg-purple-950 border border-purple-800 rounded-xl text-xs text-purple-300 flex items-center gap-2">
+      <i class="fa-solid fa-circle-info"></i> 등록된 전시 작품: <span id="gallery-count" class="font-bold text-white">0</span>개
+    </div>
+  </div>
+
+  <!-- Virtual Wall Container -->
+  <div class="glass-card p-8 rounded-2xl border border-gray-800 relative bg-gradient-to-b from-gray-900 via-gray-950 to-black min-h-[450px]">
+    <div class="absolute top-4 left-4 text-xs text-gray-500 flex items-center gap-1">
+      <i class="fa-solid fa-eye"></i> VIRTUAL EXHIBITION ROOM #1
+    </div>
+
+    <!-- Art Wall Grid -->
+    <div id="gallery-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+      <!-- Dynamically populated artworks -->
+    </div>
+
+    <div id="gallery-empty" class="text-center py-20 space-y-4">
+      <i class="fa-solid fa-image text-4xl text-gray-600 block mx-auto"></i>
+      <p class="text-gray-400 text-sm">아직 전시된 작품이 없습니다. 2단계에서 AI 작품을 직접 생성해보세요!</p>
+      <button onclick="switchTab('create')" class="px-4 py-2 bg-cyan-500/20 text-cyan-300 rounded-lg text-xs border border-cyan-500/30">작품 생성하러 가기</button>
+    </div>
+  </div>
+
+  <!-- AI Ethics Discussion Section -->
+  <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-4">
+    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+      <i class="fa-solid fa-comments text-cyan-400"></i>
+      생각해보기: AI 예술과 메타버스 전시의 저작권 및 가치
+    </h3>
+    <p class="text-xs text-gray-400 leading-relaxed">
+      AI가 생성한 미술 작품의 저작권은 프롬프트를 작성한 인간에게 있을까요, 아니면 학습 데이터를 제공한 원작자들에게 있을까요? 
+      메타버스 미술관이 실제 실물 미술관과 다른 예술적 가치는 무엇인지 나의 생각을 적어보세요.
+    </p>
+    <div class="flex gap-2">
+      <input type="text" id="opinion-input" placeholder="AI 예술에 관한 나의 견해를 적어보세요..." class="flex-grow bg-gray-900 border border-gray-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500">
+      <button onclick="submitOpinion()" class="px-6 py-3 bg-cyan-500 text-black font-bold rounded-lg text-sm hover:bg-cyan-400">작성</button>
+    </div>
+    <div id="opinion-list" class="space-y-2 pt-2"></div>
+  </div>
+</section>
